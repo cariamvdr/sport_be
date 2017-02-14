@@ -15,8 +15,6 @@ abstract class Table {
     
     public $id = 0;
     
-    abstract static function getBindings();
-    
     static function init(&$obj, $id=0){
         $class = get_called_class();
         $obj->table = $class::TABLE_NAME;

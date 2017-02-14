@@ -3,7 +3,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 spl_autoload_register(function($class_name) {
-    require_once $class_name.".php";
+    $filename = dirname(__FILE__).DIRECTORY_SEPARATOR.str_replace("\\", DIRECTORY_SEPARATOR, $class_name);
+    require_once $filename.".php";
 });
 
 if (isset($_SERVER["HTTP_CONTENT_TYPE"]) &&

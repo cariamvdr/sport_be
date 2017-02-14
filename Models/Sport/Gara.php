@@ -6,13 +6,13 @@ use Models\Table as Table;
 class Atleta extends Table {
     
     // Nome della tabella
-    const TABLE_NAME = "atleti";
+    const TABLE_NAME = "gare";
     
-    public $nome;
-    public $datanascita;
-    public $sesso;
-    public $telefono;
-    public $cf;
+    public $gara;
+    public $km;
+    public $orapartenza;
+    public $luogopartenza;
+    public $luogoarrivo;
     protected $iscrizioni = array(); // array of ID
     
     public function __construct($id = 0, $params = []){
@@ -41,11 +41,11 @@ class Atleta extends Table {
         return [
             //"nome_colonna"=>"nome_parametro",
             "id"=>"id",
-            "nome"=>"nome",
-            "datanascita"=>"datanascita",
-            "sesso"=>"sesso",
-            "telefono"=>"telefono",
-            "cf"=>"cf"
+            "gara"=>"gara",
+            "km"=>"km",
+            "orapartenza"=>"orapartenza",
+            "luogopartenza"=>"luogopartenza",
+            "luogoarrivo"=>"luogoarrivo"
         ];
     }
     
@@ -74,8 +74,8 @@ class Atleta extends Table {
     public function storeIscrizioni(){
         try{
             // rimuovo quelle relazioni che non valgono piu
-            $sql = "UPDATE iscrizioni SET atleti_id = null WHERE id NOT IN (".
-                    join(", ",$this->iscrizioni).") AND atleti_id = :id";
+            $sql = "UPDATE iscrizioni SET gare_id = null WHERE id NOT IN (".
+                    join(", ",$this->iscrizioni).") AND gare_id = :id";
             $stmt = self::$db->prepare($sql);
             $stmt->execute([":id"=>$this->id]);
         }catch(\PDOException $e){
@@ -85,7 +85,7 @@ class Atleta extends Table {
         if(count($this->iscrizioni)){
             try{
                 // aggiungo quelle relazione che valgono da adesso
-                $sql = "UPDATE iscrizioni SET atleti_id = :id WHERE id IN (".
+                $sql = "UPDATE iscrizioni SET gare_id = :id WHERE id IN (".
                         join(", ",$this->iscrizioni).")";
                 $stmt = self::$db->prepare($sql);
                 $stmt->execute([":id"=>$this->id]);

@@ -19,9 +19,9 @@
 -- Current Database: `sport`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `sport` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `c03` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `sport`;
+USE `c03`;
 
 --
 -- Table structure for table `atleti`
